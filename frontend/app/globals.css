@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* ── Bricolage Grotesque — self-hosted (fontsource, OFL) ───────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2");
+}
+
+/* ── Tokens — dunia "Mega Mendung": indigo batik tulis Pekalongan ──── */
+@theme {
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #eef1f6;
+  --color-surface: #ffffff;
+  --color-ink: #1e2a44;
+  --color-ink-soft: #46587a;
+  --color-line: #dde3ec;
+
+  --color-indigo-deep: #2f4470;
+  --color-indigo-ink: #22335c;
+  --color-indigo-soft: #9db4dd;
+  --color-indigo-mist: #d7e0f0;
+
+  --color-clay: #a84425;
+  --color-clay-deep: #8c3319;
+  --color-signal: #b3551e;
+}
+
+/* Permukaan: membran indigo yang tenang, bukan gradien dekoratif */
+.mega-mendung {
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(
+      52rem 30rem at 115% -12%,
+      rgba(47, 68, 112, 0.14),
+      transparent 62%
+    ),
+    radial-gradient(
+      44rem 26rem at -18% 108%,
+      rgba(34, 51, 92, 0.12),
+      transparent 58%
+    );
+}
+
+/* ── Permukaan browser yang ikut didesain ──────────────────────────── */
+::selection {
+  background: var(--color-indigo-soft);
+  color: var(--color-indigo-ink);
+}
+
+input,
+textarea {
+  caret-color: var(--color-indigo-deep);
+}
+
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-indigo-soft) transparent;
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-indigo-soft);
+  border-radius: 9999px;
+}
+
+/* ── Motion: satu momen berbahasa (masuk dari mist, bukan sekadar fade) */
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.msg-in {
+  animation: msg-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes dot-pulse {
+  from {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.dot-pulse {
+  animation: dot-pulse 0.9s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msg-in {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
