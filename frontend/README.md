@@ -1,7 +1,8 @@
 # Frontend UMKM Assistant
 
-Chat pelanggan "Rara" + dashboard pemilik UMKM, terhubung ke flow RAG
-Langflow di `localhost:7860`.
+Chat pelanggan "Rara" + dashboard pemilik UMKM. RAG-nya berjalan **di dalam
+Next.js** — dokumen dibaca dari `../knowledge-base/`, jawaban dihasilkan **IBM
+Granite via Ollama** di `localhost:11434`. Tidak ada Langflow maupun IBM Bob.
 
 ## Menjalankan
 
@@ -16,14 +17,17 @@ Buka `http://localhost:3000` (chat) dan `http://localhost:3000/admin`.
 > Node.js di mesin ini portable, ada di `D:\Project\node-portable`.
 > Tambahkan ke PATH atau jalankan lewat terminal yang sudah tahu lokasinya.
 
-## Koneksi ke Langflow
+## Koneksi ke Ollama (IBM Granite)
 
-1. Pastikan Langflow jalan: `.venv/Scripts/langflow.exe run` di root repo.
-2. Buat flow RAG (lihat `../langflow/BUILD-GUIDE.md`), lalu salin
-   `.env.example` → `.env.local` dan isi `LANGFLOW_FLOW_ID` dengan ID flow-mu
-   (lihat URL browser di Langflow, atau klik ikon **API** di flow).
-3. Tanpa flow, chat akan menampilkan pesan gagal yang ramah — UI tetap bisa
-   dikembangkan.
+1. Pastikan Ollama jalan (`ollama serve`, atau aplikasi Ollama di system tray)
+   dan model sudah di-pull: `ollama pull granite3.3:8b`.
+2. Salin `.env.example` → `.env.local` lalu sesuaikan bila perlu
+   (`OLLAMA_MODEL=granite3.3:2b` untuk demo yang jauh lebih cepat).
+3. System prompt diambil dari `../langflow/agent-system-prompt.md` (sumber
+   kebenaran) dan korpus dari `../knowledge-base/` — keduanya dibaca ulang tiap
+   request, jadi edit dokumen/prompt langsung terpakai tanpa restart.
+4. Tanpa Ollama/model, chat menampilkan pesan gagal yang ramah — cek
+   `GET /api/chat` untuk preflight (status Ollama, model, daftar dokumen).
 
 ## Struktur
 
@@ -32,7 +36,7 @@ app/
 ├── page.tsx          ← Chat pelanggan (Rara)
 ├── admin/page.tsx    ← Dashboard pemilik (upload + panel eskalasi)
 └── api/chat/route.ts ← Proxy ke Langflow (sekaligus pemecah CORS)
-lib/langflow.ts       ← Integrasi + ekstraksi jawaban + deteksi eskalasi
+lib/rag.ts            ← RAG lokal: korpus + prompt grounding + Ollama + memory sesi
 ```
 
 ## Catatan desain

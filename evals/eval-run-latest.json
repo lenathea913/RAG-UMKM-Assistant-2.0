@@ -1,173 +1,182 @@
 [
   {
+    "id": "A1",
+    "kategori": "grounding",
+    "soal": "Berapa harga Batik Tulis Mega Mendung Premium?",
+    "jawaban": "Kak, harga Batik Tulis Mega Mendung Premium adalah Rp 1.850.000. Untuk pesanan, silakan hubungi admin melalui chat atau hubungi nomor rekening yang disediakan. Selamat mencoba!",
+    "durasi_detik": 20,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "A2",
+    "kategori": "grounding",
+    "soal": "Ada stok kemeja Parang Rusak ukuran XXL?",
+    "jawaban": "Kak, stok kemeja Pria Parang Rusak ukuran XXL saat ini tidak tersedia. Saya akan mencatat pertanyaan Anda dan menghubungi admin saat jam kerja untuk dapat membantu lebih lanjut. Terima kasih.",
+    "durasi_detik": 21,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
     "id": "A3",
     "kategori": "grounding",
     "soal": "Cara ordernya gimana, Kak?",
-    "jawaban": "Kak, cara ordernya cukup mudah. Saya akan siapkan cara pemesanan berikut:\n\n1. Anda perlu menyampaikan kode produk dan jumlah yang diinginkan.\n2. Setelah itu, saya (Rara) akan mengirim total harga dan nomor rekening/QRIS.\n3. Setelah Anda melakukan transfer, jangan lupa kirim bukti transfer Anda.\n4. Barang akan dikirim maksimal 1x24 jam (hari kerja) setelah pembayaran terkonfirmasi oleh bank.\n5. Nomor resi akan kirimkan melalui WhatsApp.\n\nBatik tulis dibuat saat dipesan (made to order), waktu tunggu 2-3 minggu. Untuk informasi lebih lanjut, bisa hubungi saya atau admin di jam operasional Senin–Sabtu, 08.00–17.00 WIB.\n\nSelamat mencoba!",
-    "durasi_detik": 84,
+    "jawaban": "Kak, cara pemesanan di Batik Larasati Pekalongan cukup mudah. Berikut langkah-langkahnya:\n\n1. Pelanggan menyebut kode produk dan jumlah yang diinginkan.\n2. Admin akan mengirimkan total harga dan nomor rekening/QRIS.\n3. Pelanggan melakukan transfer dan kirim bukti transfer.\n4. Setelah pembayaran terkonfirmasi, barang akan dikirim maksimal 1×24 jam (hari kerja) setelah pembayaran terkonfirmasi.\n5. Nomor resi akan dikirim melalui WhatsApp.\n\nBatik tulis dibuat saat dipesan (made to order), waktu tunggu 2–3 minggu.\n\nUntuk pertanyaan lebih lanjut, hubungi kami Senin–Sabtu, 08.00–17.00 WIB melalui chat, atau hubungi asisten AI (Rara) 24/7. Di luar jam kerja, pertanyaan yang belum terjawab akan diteruskan ke admin saat jam kerja.\n\nSelamat mencoba!",
+    "durasi_detik": 89,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "A4",
     "kategori": "grounding",
     "soal": "Batik tulis bisa langsung kirim hari ini?",
-    "jawaban": "Kak, batik tulis tidak siap saja, dibuat setelah pesanan. Waktu pengambilan pesanan 2–3 minggu untuk tulis tangan penuh. Jadi, tidak bisa kirim langsung hari ini. Maaf jika terdengar kurang menyenangkan.",
-    "durasi_detik": 29,
+    "jawaban": "Kak, maaf, batik tulis dibuat sesuai pesanan dan waktu tunggu 2-3 minggu setelah pesanan diterima. Jangan ragu untuk hubungi admin jika ingin memesan.",
+    "durasi_detik": 20,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "A5",
     "kategori": "grounding",
     "soal": "Kalau beli 10 pcs campur buat dijual lagi, ada harga khusus?",
-    "jawaban": "Kak, untuk pembelian 10 pcs campur, kamu dapat mendapatkan diskon 15% dari harga reguler. Untuk melihat harga reseller spesifik, kunjungi bagian harga reseller dalam dokumen Daftar Harga Resmi — Batik Larasati Pekalongan.\n\nSaya siap membantu jika ingin menemukan produk spesifik atau membutuhkan informasi lain.",
-    "durasi_detik": 37,
+    "jawaban": "Mohon maaf, Kak, program reseller hanya tersedia untuk batik cap dan ready to wear, dengan diskon 15% dari harga reguler. Batik tulis made to order tidak termasuk dalam program reseller. Untuk pertanyaan lebih lanjut, silakan hubungi admin saat jam kerja.",
+    "durasi_detik": 28,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "A6",
     "kategori": "grounding",
     "soal": "Gimana cara ngerawat batik tulisnya?",
-    "jawaban": "Kak, untuk menjaga batik tulis Anda, tindakan-tindakan berikut rekomendasi:\n\n1. Cuci tangan dengan air dingin dan sabun lembut (tingkatkan sudhnya, jangan menggunakan deterjen cair batik).\n2. Hindari mencuci batik tulis bersama pakaian lain selama 3 kali pencucian pertama.\n3. Jemur di tempat teduh, jangan langsung terkena sinar matahari.\n4. Setelah batik tulis siap, hindari dicuci mesin.",
-    "durasi_detik": 203,
+    "jawaban": "Kak, untuk menjaga batik tulis Anda, ikuti langkah-langkah berikut:\n\n1. **Cuci tangan dengan air dingin dan sabun lembut**: Gunakan sabun yang aman untuk batik agar warna tidak hancur.\n2. **Jangan dicuci bersama pakaian lain** pada 3 kali pencucian pertama (luntur).\n3. **Jemur di tempat teduh**, jangan terkena sinar matahari langsung.\n4. **Setel suhu sedang**, disetting dari bagian dalam kain.\n5. **Hindari dicuci mesin** sekali, cukup dengan cuci tangan.\n\nUntuk pertanyaan lebih lanjut, hubungi asisten AI (Rara) di jam operasional Senin–Sabtu, 08.00–17.00 WIB, atau mengirim pesan melalui chat 24/7.\n\nCatatan: Batik tulis made to order tidak dapat diretur kecuali cacat produksi.\n\nSelamat menjaga batik tulis Anda!",
+    "durasi_detik": 87,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "A7",
     "kategori": "grounding",
     "soal": "Gratis ongkir nggak ke luar Jawa?",
-    "jawaban": "Kak, gratis ongkir tidak berlaku untuk pemesanan ke luar Jawa kecuali jika total pembelian lebih dari Rp 1.500.000. Jangan ragu untuk bertanya jika ingin lebih jelas, tetapi mohon maaf jika informasi tersebut tidak ditemukan di konteks yang telah diberikan.",
-    "durasi_detik": 27,
+    "jawaban": "Kak, gratis ongkir tidak tersedia untuk pembelian di luar Jawa, sehingga Anda akan dikenakan biaya ongkir sesuai dengan rincian transaksi. Mohon maaf atas kesulitan tersebut. Pertanyaan lainnya, apakah ada?",
+    "durasi_detik": 24,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "A8",
     "kategori": "grounding",
     "soal": "Motif buketan yang klasik warnanya gimana?",
-    "jawaban": "Kak, motif Buketan Klasik memiliki warna pastel. Dilengkapi dengan motif buketan khas pesisir Pekalongan.",
-    "durasi_detik": 16,
+    "jawaban": "Kak, motif Buketan Klasik memiliki warna pastel yang unik. Selain itu, motif Buketan khas pesisir Pekalongan, menawarkan pengalaman batik tradisional yang terkenal.",
+    "durasi_detik": 20,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C1",
-    "kategori": "anti-halusinasi",
-    "soal": "Batik tulisnya bisa diskon 50% nggak?",
-    "jawaban": "Kak, batik tulis tidak termasuk dalam program reseller, jadi diskon 15% saja yang berlaku. Diskon 50% tidak ada, maaf. Jika ada pertanyaan lain, silahkan tanya ya.",
-    "durasi_detik": 22,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C2",
-    "kategori": "anti-halusinasi",
-    "soal": "Toko ini buka cabang di Bandung nggak?",
-    "jawaban": "Kak, informasi tentang cabang di Bandung tidak tersedia di dokumen yang saya miliki. Saya rekomendasikan untuk menghubungi asisten AI (Rara) 24/7 atau menghubungi admin saat jam kerja untuk memperoleh informasi lebih lanjut. Terima kasih.",
-    "durasi_detik": 31,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C3",
-    "kategori": "anti-halusinasi",
-    "soal": "Kode promo apa yang aktif bulan ini?",
-    "jawaban": "Kak, sekarang tidak ada promo khusus seperti kode promo yang aktif. Tetapi, Anda bisa mendapatkan ongkiran gratis untuk pembelian di atas Rp 500.000 ke seluruh Jawa atau gratis ongkir ke luar Jawa untuk pembelian di atas Rp 1.500.000. Selamat belanja! Jika ada pertanyaan lain, saya siap membantu.",
-    "durasi_detik": 38,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C4",
-    "kategori": "anti-halusinasi",
-    "soal": "Nomor WhatsApp adminnya berapa?",
-    "jawaban": "Kak, untuk mengetahui nomor WhatsApp admin, segera hubungi mereka melalui chat disini. Kami hanya bisa menjawab pertanyaan yang sudah ada dalam konteks yang diberikan. Jangan lupa untuk menyediakan konteks yang diinginkan agar kami dapat membantu dengan baik. Terima kasih!",
-    "durasi_detik": 28,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C5",
-    "kategori": "anti-halusinasi",
-    "soal": "Rekomendasi obat batuk apa yang bagus?",
-    "jawaban": "Maaf, Rara, saat ini saya hanya bisa menjawab pertanyaan seputar produk dan layanan dari toko Batik Larasati. Saya tidak dapat memberikan rekomendasi obat batuk karena hal tersebut bukan bagian dari konteks dokumen yang diberikan. Saya sarankan kamu menghubungi dokter atau farma Anda untuk perawatan batuk.\n\nSelamat menjaga kesehatan Anda!",
-    "durasi_detik": 144,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C6",
-    "kategori": "anti-halusinasi",
-    "soal": "Batik Parang Rusak boleh dicuci mesin?",
-    "jawaban": "Kak, Batik Parang Rusak tidak boleh dicuci mesin secara resmi. Di dokumentasi, mohon dinotifikasikan bahwa batik tulis harus disihaskan tangan dengan sabun lembut dan air dingin. Dicuci mesin dilarang sehingga terhindari kerusakan. Maaf, jika menyebabkan kesulitan.",
-    "durasi_detik": 161,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "C7",
-    "kategori": "anti-halusinasi",
-    "soal": "Harga Mega Mendung Premium kalau dibayar tunai diskon 10%?",
-    "jawaban": "Mohon maaf Kak, diskon tunai belum ada di dokumen kami. Harga Mega Mendung Premium tetap Rp 1.850.000. Pertanyaan Kakak akan saya teruskan ke admin ya.",
-    "durasi_detik": 174,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
-  },
-  {
-    "id": "A1",
-    "kategori": "grounding",
-    "soal": "Berapa harga Batik Tulis Mega Mendung Premium?",
-    "jawaban": "Harga Batik Tulis Mega Mendung Premium adalah Rp 1.850.000.",
-    "durasi_detik": 143,
-    "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "B1",
     "kategori": "multi-doc",
     "soal": "Dress Buketan ukuran S ada nggak, harganya berapa?",
-    "jawaban": "Dress Buketan dalam ukuran S ada! Harga setiap dress Wanita Buketan Rp 465.000.",
-    "durasi_detik": 150,
+    "jawaban": "Kak, Dress Wanita Buketan tersedia dalam ukuran S, M, dan L, harganya Rp 465.000. Jika ingin memesan, silakan hubungi kami melalui chat Senin–Sabtu, 08.00–17.00 WIB atau hubungi asisten AI (Rara) 24/7 untuk pertanyaan umum. Jika memesan, pastikan mengirimkan bukti pembayaran dan nomor rekening kami akan mengirimkan nomor resi melalui WhatsApp. Terima kasih!",
+    "durasi_detik": 47,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "B2",
     "kategori": "multi-doc",
     "soal": "Mega Mendung cap sama tulis, beda harga berapa jauh?",
-    "jawaban": "Harga Mega Mendung cap adalah Rp 385.000, sedangkan harga Mega Mendung tulis adalah Rp 1.850.000. Beda harga mencapai Rp 1.495.000.",
-    "durasi_detik": 161,
+    "jawaban": "Kak, pertanyaan Anda tentang harga antara Mega Mendung Cap dan Mega Mendung Premium. Berdasarkan dokumen, harga Mega Mendung Cap adalah Rp 385.000, sedangkan Mega Mendung Premium adalah Rp 1.850.000. Jadi, harga antara kedua produk mencapai Rp 1.465.000. Untuk informasi lebih lanjut, silakan hubungi admin saat jam operasional.",
+    "durasi_detik": 43,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "B3",
     "kategori": "multi-doc",
     "soal": "Beli kemeja + dress dapat potongan nggak?",
-    "jawaban": "Kak, selamat datang! Temukan promo bundling yang menarik: beli kemeja + dress dapat mendapatkan potongan sebesar Rp 50.000. \n\nUntuk melihat daftar harga masing-masing produk, bisa lihat di tabel di document.",
-    "durasi_detik": 164,
+    "jawaban": "Kak, promosi bundling ini memungkinkan Anda untuk membeli kemeja dan dress bersamaan untuk mendapatkan potongan harga sebesar Rp 50.000. Untuk memanfaatkan promosi ini, silakan pesan produk berikut secara bersamaan:\n\n- Kemeja Pria Parang Rusak (RTW-KM-201)\n- Dress Wanita Buketan (RTW-DR-202)\n\nSelama promosi ini berlaku, Anda akan mendapatkan potongan harga sebesar Rp 50.000 setelah pembayaran. Jangan ragu untuk hubungi kami jika membutuhkan bantuan lebih lanjut.\n\nCatatan: Potongan harga ini tidak termasuk biaya pengiriman.\n\nCatatan tambahan: Untuk pesanan, silakan menghubungi kami melalui chat Senin–Sabtu, 08.00–17.00 WIB, atau mengirim pesanan melalui QRIS. Pesanan di luar jam kerja akan diteruskan ke admin saat jam kerja.\n\nTerima kasih atas kepercayaan Anda dengan Batik Larasati Pekalongan.",
+    "durasi_detik": 98,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C1",
+    "kategori": "anti-halusinasi",
+    "soal": "Batik tulisnya bisa diskon 50% nggak?",
+    "jawaban": "Maaf, Kak, diskon 50% tidak tersedia untuk batik tulis. Harga Mega Mendung Premium tetap Rp 1.850.000 dan Buketan Klasik Rp 1.450.000. Pertanyaan Kakak akan saya teruskan ke admin untuk informasi lebih lanjut.",
+    "durasi_detik": 29,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C2",
+    "kategori": "anti-halusinasi",
+    "soal": "Toko ini buka cabang di Bandung nggak?",
+    "jawaban": "Maaf, Kak, informasi tentang cabang di Bandung tidak tersedia di dokumen yang diberikan. Untuk pertanyaan semacam ini, saran saya adalah untuk menghubungi admin langsung saat jam operasional Senin–Sabtu, 08.00–17.00 WIB. Mohon maaf atas kesulitan ini.",
+    "durasi_detik": 29,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C3",
+    "kategori": "anti-halusinasi",
+    "soal": "Kode promo apa yang aktif bulan ini?",
+    "jawaban": "Mohon maaf, Kak, promo khusus yang aktif bulan ini tidak tersedia di dokumen. Untuk informasi terkini tentang promosi, saya akan mengarahkan pertanyaan Anda ke admin.",
+    "durasi_detik": 18,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C4",
+    "kategori": "anti-halusinasi",
+    "soal": "Nomor WhatsApp adminnya berapa?",
+    "jawaban": "Maaf, informasi kontak admin tidak tersedia di dokumen yang diberikan. Saya akan menghubungi admin untuk menanyakan informasi tersebut dan akan menghubungi kembali Anda secepat mungkin.",
+    "durasi_detik": 17,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C5",
+    "kategori": "anti-halusinasi",
+    "soal": "Rekomendasi obat batuk apa yang bagus?",
+    "jawaban": "Maaf, saya hanya asisten layanan pelanggan untuk toko Batik Larasati Pekalongan dan tidak dapat memberikan rekomendasi obat batuk. Saya mendorong Anda untuk menghubungi dokter atau farmasi untuk mendapatkan informasi medis yang tepat.",
+    "durasi_detik": 24,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C6",
+    "kategori": "anti-halusinasi",
+    "soal": "Batik Parang Rusak boleh dicuci mesin?",
+    "jawaban": "Kak, terima kasih atas pertanyaan Anda. Untuk menjaga kualitas batik Parang Rusak, kami sarankan untuk mencuci dengan tangan dengan air dingin dan sabun lembut. Dicuci mesin tidak dianjurkan karena bisa menyebabkan kerusakan batik. Semoga membantu! Jika membutuhkan informasi lain, silakan hubungi kami di jam operasi.",
+    "durasi_detik": 34,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
+  },
+  {
+    "id": "C7",
+    "kategori": "anti-halusinasi",
+    "soal": "Harga Mega Mendung Premium kalau dibayar tunai diskon 10%?",
+    "jawaban": "Mohon maaf, Kak, ketentuan diskon tunai belum ada di dokumen kami. Harga Mega Mendung Premium tetap Rp 1.850.000. Pertanyaan Kakak akan saya teruskan ke admin ya.",
+    "durasi_detik": 24,
+    "error": null,
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "D1",
     "kategori": "bahasa",
     "soal": "Gan, batiknya ready?",
-    "jawaban": "Kak, batik tulis saat dipesan membutuhkan waktu 2–3 minggu. Kalo ingin tahu lebih detail, mohon baca FAQ & SOP di website kami.",
-    "durasi_detik": 147,
+    "jawaban": "Kak, selamat datang! Batik tulis masih diproses, waktu tunggu 2-3 minggu setelah pesanan. Untuk produk siap pakai, mohon cek ketersediaan di katalog produk. Jika ingin melihat ketersediaan dan harga, silakan lihat daftar harga resmi di dokumen price-list. Jika membutuhkan bantuan lebih lanjut, saya siap membantu.",
+    "durasi_detik": 36,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   },
   {
     "id": "D2",
     "kategori": "bahasa",
     "soal": "Is the Mega Mendung Premium available?",
-    "jawaban": "Ya, Mega Mendung Premium tersedia. Harga sebesar Rp 1.850.000. Kemudian, apakah Anda ingin memeriksa ketersediaan stok atau membutuhkan informasi lainnya?",
-    "durasi_detik": 145,
+    "jawaban": "Kak, Mega Mendung Premium tersedia. Kode produknya BT-MM-001 dan harga Rp 1.850.000. Untuk pesanan, silakan menyebut kode produk dan jumlah yang diinginkan, lalu admin akan mengirimkan total pembayaran dan nomor rekening. Setelah pembayaran terkonfirmasi, barang akan dikirim maksimal 1×24 jam (hari kerja) setelah pembayaran terkonfirmasi. Nomor resi akan dikirim melalui WhatsApp.",
+    "durasi_detik": 42,
     "error": null,
-    "model_catatan": "sesuai config flow saat dijalankan"
+    "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan"
   }
 ]

@@ -1,4 +1,4 @@
-# Daftar Harga Resmi — Batik Larasati Pekalongan
+# Daftar Harga Resmi Batik Larasati Pekalongan
 
 Berlaku mulai 1 September 2026. Harga dalam Rupiah, belum termasuk ongkir.
 

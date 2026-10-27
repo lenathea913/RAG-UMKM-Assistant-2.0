@@ -1,4 +1,4 @@
-# FAQ & SOP — Batik Larasati Pekalongan
+# FAQ & SOP Batik Larasati Pekalongan
 
 ## Cara Pemesanan
 
@@ -34,6 +34,6 @@ Batik tulis dibuat saat dipesan (made to order): waktu tunggu 2–3 minggu.
 
 ## Layanan Lain
 
-- Kustom motif untuk pesanan corporat (minimal 50 pcs) — hubungi admin.
+- Kustom motif untuk pesanan corporat (minimal 50 pcs). Hubungi admin.
 - Wrapping kado gratis untuk ready to wear.
 - Member reseller: cek halaman Daftar Harga bagian harga reseller.

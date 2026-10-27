@@ -1,4 +1,4 @@
-# Katalog Produk — Batik Larasati Pekalongan
+# Katalog Produk Batik Larasati Pekalongan
 
 Butik batik tulis & cap. Berdiri sejak 2015 di Pekalongan, Jawa Tengah.
 Setiap kain dicetak/ditulis tangan oleh pengrajin lokal Pekalongan.

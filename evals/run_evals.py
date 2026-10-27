@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-run_evals.py — jalankan eval UMKM Assistant langsung via API Langflow
-(tanpa Playground, tanpa copy-paste manual).
+run_evals.py — jalankan eval UMKM Assistant lewat API chat lokal
+(tanpa Playground, tanpa Langflow, tanpa API key).
+
+Prasyarat: frontend jalan (`npm run dev` di frontend/) dan Ollama aktif
+dengan model yang dipilih di .env.local (OLLAMA_MODEL).
 
 Cara pakai:
-  export LANGFLOW_API_KEY="sk-..."   # dari Langflow: ikon profil > Settings > Langflow API
-  python run_evals.py --inspect      # cek config flow (model & prompt)
+  python run_evals.py --inspect      # preflight: Ollama, model, dokumen KB
   python run_evals.py --ids A1 A3    # jalankan soal tertentu
-  python run_evals.py --all          # jalankan semua 20 soal (lambat!)
+  python run_evals.py --all          # jalankan semua 20 soal (lambat! 8B di CPU bisa >1 jam)
 
 Hasil: dicetak ke layar + disimpan (merge per ID) ke evals/eval-run-latest.json.
-Jangan pernah commit API key — selalu lewat environment variable.
+Env opsional: APP_BASE_URL (default http://localhost:3000).
 """
 import argparse
 import gzip
@@ -20,9 +22,7 @@ import time
 import urllib.error
 import urllib.request
 
-BASE = os.environ.get("LANGFLOW_BASE_URL", "http://localhost:7860")
-KEY = os.environ.get("LANGFLOW_API_KEY", "")
-FLOW_NAME_PREFIX = os.environ.get("LANGFLOW_FLOW_NAME", "umkm").lower()
+BASE = os.environ.get("APP_BASE_URL", "http://localhost:3000").rstrip("/")
 RESULTS_PATH = os.path.join(os.path.dirname(__file__), "eval-run-latest.json")
 
 # 20 soal eval (sumber kebenaran: eval-questions.md)
@@ -50,13 +50,12 @@ QUESTIONS = {
 }
 
 
-def api(path, method="GET", payload=None, timeout=300):
+def api(path, method="GET", payload=None, timeout=600):
     req = urllib.request.Request(
         BASE + path,
         method=method,
         data=json.dumps(payload).encode() if payload is not None else None,
         headers={
-            "x-api-key": KEY,
             "Content-Type": "application/json",
             "Accept-Encoding": "identity",
         },
@@ -68,71 +67,49 @@ def api(path, method="GET", payload=None, timeout=300):
         return json.loads(raw.decode())
 
 
-def find_flow():
-    flows = api("/api/v1/flows/")
-    if isinstance(flows, dict):
-        flows = flows.get("flows", [])
-    for f in flows:
-        if f.get("name", "").lower().startswith(FLOW_NAME_PREFIX):
-            return f["id"], f.get("name", "?")
-    raise SystemExit(f"Flow dengan nama berawalan '{FLOW_NAME_PREFIX}' tidak ditemukan.")
-
-
-def inspect_flow(flow_id):
-    f = api(f"/api/v1/flows/{flow_id}")
-    nodes = f.get("data", {}).get("nodes", [])
-    print(f"Flow: {f.get('name')} (id={flow_id}) — {len(nodes)} node\n")
-    for n in nodes:
-        nd = n.get("data", {})
-        ntype = nd.get("type", "?")
-        name = nd.get("node", {}).get("display_name", "?")
-        print(f"== {ntype} :: {name}")
-        tmpl = nd.get("node", {}).get("template", {})
-        for k, v in tmpl.items():
-            if k.startswith("_") or not isinstance(v, dict):
-                continue
-            val = v.get("value")
-            if val in (None, "", [], {}):
-                continue
-            kl = k.lower()
-            if "model" in kl or "instructions" in kl or "template" in kl or "knowledge" in kl:
-                s = json.dumps(val, ensure_ascii=False)
-                marker = ""
-                if isinstance(val, str) and "LARANGAN TAMBAHAN" in val:
-                    marker = "   <<< PROMPT BARU (hardening) TERPASANG"
-                print(f"   {k} = {s[:240]}{marker}")
-        print()
-
-
-def extract_text(resp):
+def inspect_app():
+    """Preflight: cek backend, Ollama, model, dan dokumen knowledge base."""
     try:
-        o = resp["outputs"][0]["outputs"][0]
-        msg = o.get("results", {}).get("message")
-        if isinstance(msg, dict):
-            return msg.get("text", "")
-        if isinstance(msg, str):
-            return msg
-        msgs = o.get("messages") or []
-        if msgs:
-            return msgs[0].get("message", "")
-        return ""
-    except Exception:
-        return ""
+        h = api("/api/chat")
+    except Exception as e:
+        raise SystemExit(
+            f"Backend tidak bisa dihubungi di {BASE}: {e}\n"
+            "Jalankan dulu: cd frontend && npm run dev"
+        )
+
+    print(f"Endpoint : {BASE}/api/chat")
+    print(f"Ollama   : {h.get('ollamaUrl')} - {'OK' if h.get('ollamaOk') else 'TIDAK TERHUBUNG'}")
+    print(f"Model    : {h.get('model')} - {'siap' if h.get('modelReady') else 'BELUM DI-PULL'}")
+    if h.get("models"):
+        print(f"  tersedia: {', '.join(h['models'])}")
+    if h.get("kbError"):
+        print(f"KB       : GAGAL - {h['kbError']}")
+    else:
+        print(f"KB       : {', '.join(h.get('kbFiles') or [])}")
+    print()
+
+    problems = []
+    if not h.get("ollamaOk"):
+        problems.append("Ollama tidak jalan (jalankan aplikasi Ollama / ollama serve)")
+    if not h.get("modelReady"):
+        problems.append(f"model {h.get('model')} belum di-pull (ollama pull {h.get('model')})")
+    if h.get("kbError"):
+        problems.append("knowledge base tidak terbaca")
+    if problems:
+        raise SystemExit("Preflight gagal:\n- " + "\n- ".join(problems))
+    print("Preflight OK - siap menjalankan eval.\n")
 
 
-def run_one(flow_id, qid, timeout):
+def run_one(qid, timeout):
     cat, q = QUESTIONS[qid]
-    payload = {
-        "input_value": q,
-        "session_id": f"eval-{qid}-{int(time.time())}",
-        "output_type": "chat",
-        "input_type": "chat",
-    }
+    payload = {"message": q, "sessionId": f"eval-{qid}-{int(time.time())}"}
     t0 = time.time()
     try:
-        resp = api(f"/api/v1/run/{flow_id}?stream=false", "POST", payload, timeout=timeout)
-        answer = extract_text(resp).strip()
-        err = None
+        resp = api("/api/chat", "POST", payload, timeout=timeout)
+        if resp.get("error"):
+            answer, err = "", f"{resp['error']} {resp.get('detail', '')}".strip()
+        else:
+            answer, err = (resp.get("text") or "").strip(), None
     except urllib.error.HTTPError as e:
         answer, err = "", f"HTTP {e.code}: {e.read().decode()[:200]}"
     except Exception as e:
@@ -144,7 +121,7 @@ def run_one(flow_id, qid, timeout):
         "jawaban": answer,
         "durasi_detik": round(time.time() - t0),
         "error": err,
-        "model_catatan": "sesuai config flow saat dijalankan",
+        "model_catatan": "sesuai OLLAMA_MODEL saat dijalankan",
     }
     return rec
 
@@ -167,20 +144,15 @@ def save_results(new_records):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--inspect", action="store_true", help="cukup tampilkan config flow")
+    ap.add_argument("--inspect", action="store_true", help="preflight: cek backend, Ollama, model, KB")
     ap.add_argument("--ids", nargs="+", help="ID soal, contoh: --ids A3 C1")
     ap.add_argument("--all", action="store_true", help="jalankan semua soal")
-    ap.add_argument("--timeout", type=int, default=280, help="detik per soal")
+    ap.add_argument("--timeout", type=int, default=600, help="detik per soal")
     args = ap.parse_args()
 
-    if not KEY:
-        raise SystemExit("Set LANGFLOW_API_KEY dulu: export LANGFLOW_API_KEY=\"sk-...\"")
-
-    flow_id, name = find_flow()
-    print(f"Flow ditemukan: {name} (id={flow_id})\n")
+    inspect_app()
 
     if args.inspect:
-        inspect_flow(flow_id)
         return
 
     if args.all:
@@ -197,7 +169,7 @@ def main():
     for qid in ids:
         cat, q = QUESTIONS[qid]
         print(f"[{qid}|{cat}] {q}")
-        rec = run_one(flow_id, qid, args.timeout)
+        rec = run_one(qid, args.timeout)
         records.append(rec)
         save_results([rec])  # simpan inkremental — aman bila proses terputus
         jaw = (rec["jawaban"] or rec["error"] or "").replace("\n", " ")

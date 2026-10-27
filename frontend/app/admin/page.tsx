@@ -78,7 +78,7 @@ export default function AdminPage() {
             Dashboard Pemilik
           </h1>
           <p className="mt-1 text-sm text-ink-soft">
-            Batik Larasati — kelola dokumen, pantau pertanyaan yang belum
+            Batik Larasati: kelola dokumen, pantau pertanyaan yang belum
             terjawab asisten.
           </p>
         </header>
@@ -182,8 +182,8 @@ export default function AdminPage() {
               </button>
             </div>
             <p className="mb-4 text-xs text-ink-soft">
-              Pertanyaan pelanggan yang tidak bisa dijawab dari dokumen — sinyal
-              dokumen baru perlu ditambahkan.
+              Pertanyaan pelanggan yang tidak bisa dijawab dari dokumen. Ini
+              sinyal bahwa dokumen baru perlu ditambahkan.
             </p>
 
             <div className="mb-3">
@@ -228,7 +228,7 @@ export default function AdminPage() {
         </div>
 
         <p className="mt-8 text-center text-[11px] text-ink-soft">
-          v0 demo — upload & eskalasi masih lokal di browser; integrasi penuh ke
+          v0 demo: upload & eskalasi masih lokal di browser; integrasi penuh ke
           Knowledge Base menyusul.
         </p>
       </div>
