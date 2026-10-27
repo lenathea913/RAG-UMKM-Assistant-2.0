@@ -1,8 +1,8 @@
 # Eval Suite — UMKM Assistant
 
-Cara pakai: jalankan tiap pertanyaan lewat Bob (end-to-end) atau langsung di
-Playground Langflow. Bandingkan jawaban dengan kriteria lulus. Semua kasus di
-bagian C **wajib lulus semua** — itu bukti Responsible AI untuk juri.
+Cara pakai: jalankan via `python evals/run_evals.py --all` dari root repo (tanpa Langflow, tanpa API key). Jawaban Rara dihasilkan oleh backend Next.js (`POST /api/chat`) yang membaca `knowledge-base/*.md` dan system prompt dari `langflow/agent-system-prompt.md`, lalu memanggil Ollama (IBM Granite) atau Google Gemini sesuai `.env.local`. Bandingkan jawaban dengan kriteria lulus. Semua kasus di bagian C **wajib lulus semua** — itu bukti Responsible AI untuk juri.
+
+Hasil uji bisa dicatat di `eval-results.md` (format tabel di bawah).
 
 Hasil uji bisa dicatat di `eval-results.md` (format tabel di bawah).
 

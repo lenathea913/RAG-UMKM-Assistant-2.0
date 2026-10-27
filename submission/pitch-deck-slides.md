@@ -77,13 +77,13 @@ Dokumen Bisnis (katalog, price list, FAQ) → [ UPLOAD ] → Asisten AI "Rara" �
 **Judul:** Dibangun Penuh di Stack IBM
 
 **Alur (teks berpanah):**
-Chat Input → Knowledge Base (embedding multilingual, Chroma) → Retrieval → Prompt Grounding → **AI Agent: IBM Granite** → Jawaban Grounded
-                                                          ↘ diuji via **IBM Bob** (MCP client → flow sebagai MCP server)
+Dokumen (katalog, price list, FAQ) → Backend Next.js (`POST /api/chat`) → read knowledge + system prompt → panggil LLM (Ollama / Gemini) → Jawaban Grounded / Penolakan + Eskalasi
+                                                          ↘ diuji via eval otomatis (`run_evals.py`)
 
 **3 poin teknis:**
-- IBM Langflow: pipeline RAG visual, diekspos sebagai API & MCP server
-- IBM Granite 3.3 8B: model bahasa dengan aturan grounding ketat + few-shot anti-halusinasi
-- IBM Bob: partner AI SDLC + jalur uji end-to-end
+- Backend sendiri: Next.js route handler + `lib/rag.ts`, membaca dokumen & prompt tiap request
+- LLM: Ollama (IBM Granite 3.3 8B lokal) atau Google Gemini
+- Evaluasi: 20 kasus otomatis (tanpa API key eksternal), termasuk 7 kasus anti-halusinasi
 
 **Narasi:** Satu kalimat per teknologi — jangan masuki detail chunking di sini.
 
@@ -98,7 +98,7 @@ Chat Input → Knowledge Base (embedding multilingual, Chroma) → Retrieval →
 - 👤 Human-in-the-loop: pertanyaan di luar cakupan diteruskan ke manusia, bukan diimprovisasi
 - 🔒 Privasi: tidak meminta/menyimpan data pribadi pelanggan; jawaban hanya dari dokumen resmi pemilik
 
-**Banner:** Diverifikasi 20 kasus uji otomatis: 18 lulus, 2 minor, 0 fakta karangan
+**Banner:** Diverifikasi 20 kasus uji otomatis: 12 lulus, 6 minor, 0 fakta karangan; C1–C7 (anti-halusinasi) berhasil ditolak
 
 **Narasi:** Ini pembeda terbesar vs chatbot generik — sampaikan dengan percaya diri.
 
@@ -138,9 +138,9 @@ Chat Input → Knowledge Base (embedding multilingual, Chroma) → Retrieval →
 **Judul:** Dari Satu Butik ke Jutaan UMKM
 
 **Timeline 3 langkah:**
-1. **Sekarang** — RAG chat + eval suite + integrasi MCP (selesai & teruji)
+1. **Sekarang** — RAG chat + eval suite otomatis (selesai & teruji)
 2. **Berikutnya** — Channel nyata: WhatsApp Business / Instagram DM; panel eskalasi untuk admin
-3. **Skala** — Multi-tenant SaaS: 1 platform, ribuan UMKM, tiap toko punya knowledge base sendiri; migrasi ke watsonx.ai (Granite cloud); dukungan bahasa daerah
+3. **Skala** — Multi-tenant SaaS: 1 platform, ribuan UMKM, tiap toko punya knowledge base sendiri; migrasi ke LLM cloud bila perlu; dukungan bahasa daerah
 
 **Narasi:** Pola "ganti dokumen = asisten baru" membuat replikasi hampir tanpa biaya.
 
@@ -155,8 +155,8 @@ Dokumen Bisnis Anda, Kini Bisa Menjawab.
 UMKM Assistant — layanan pelanggan 24/7 yang akurat, jujur, dan berbahasa Indonesia.
 
 **Footer:**
-GitHub: github.com/lenathea913/umkm-assistant
-Stack: IBM Langflow • IBM Granite • IBM Bob
+GitHub: github.com/lenathea913/RAG-UMKM-Assistant-2.0
+Stack: Next.js • Ollama (IBM Granite) / Gemini • backend RAG sendiri
 Terima kasih!
 
 **Narasi:** Tutup dengan ajakan: "Setiap UMKM yang punya dokumen, hari ini bisa punya CS."

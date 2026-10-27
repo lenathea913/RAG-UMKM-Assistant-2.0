@@ -7,30 +7,30 @@ yang persis seperti daftar di bawah.
 ## Daftar file yang wajib ada
 
 ### `01-chat-playground.png` — Jawaban grounded (wajib)
-Di Langflow → flow `UMKM Assistant` → **Playground**.
+Di aplikasi: `http://localhost:3000`.
 - Tanya: `Berapa harga Batik Tulis Mega Mendung Premium?`
 - Pastikan terlihat: pertanyaan + jawaban berisi **Rp 1.850.000** dan persona Rara.
-- 💡 Usahakan model `granite3.3:8b` sedang aktif — jawaban lebih meyakinkan.
+- 💡 Untuk jawaban lebih tajam, pastikan Ollama model `granite3.3:8b` aktif (atau pakai Gemini).
 
 ### `02-anti-halusinasi.png` — Buktinya AI jujur (paling menentukan!)
-Masih di Playground, sesi yang sama atau baru.
+Masih di aplikasi, tab chat yang sama atau baru.
 - Tanya: `Harga Mega Mendung Premium kalau dibayar tunai diskon 10%?`
 - Pastikan terlihat: jawaban **menolak menghitung** + menyebut harga tetap
   Rp 1.850.000 + tawaran meneruskan ke admin.
 - 💡 Ini pembeda Responsible AI — pastikan teks jawabannya terbaca jelas.
 
-### `03-langflow-workflow.png` — Arsitektur flow
-Canvas flow `UMKM Assistant` (zoom to fit / Ctrl+Shift+F).
-- Pastikan terlihat: rantai lengkap Chat Input → Knowledge → Parser → Prompt →
-  Agent (nama model Granite/Ollama terbaca) → Chat Output, dan semua kabel nyambung.
-- 💡 Buat panel side bar tertutup supaya canvas lega & nama flow di header terlihat.
+### `03-arsitektur.png` — Struktur project (opsional)
+Screenshot struktur folder atau diagram arsitektur backend Next.js.
+- Pastikan terlihat: `frontend/app/api/chat/route.ts`, `frontend/lib/rag.ts`,
+  dan `knowledge-base/*.md`.
+- 💡 Bisa juga screenshot contoh dokumen knowledge base.
 
-### `04-knowledge-base.png` — Sumber pengetahuan
-Halaman **Projects → Knowledge**.
-- Pastikan terlihat: KB `umkm-batik2`, status **Ready**, 5 chunks, embedding model.
+### `04-katalog.png` — Halaman katalog & harga reseller (opsional)
+Halaman `http://localhost:3000/katalog`.
+- Pastikan terlihat: tabel harga produk + tabel harga reseller (diskon 15%).
 
 ### `05-eval-suite.png` — Kualitas terukur
-Terminal berisi hasil `python evals/run_evals.py` (beberapa soal cukup, tidak
+Terminal berisi hasil `python evals/run_evals.py --all` (beberapa soal cukup, tidak
 harus --all penuh).
 - Pastikan terlihat: ID soal (A1/C7 dll), durasi, dan potongan jawaban.
 
@@ -45,6 +45,12 @@ harus --all penuh).
 
 - [ ] 01-chat-playground.png
 - [ ] 02-anti-halusinasi.png
-- [ ] 03-langflow-workflow.png
-- [ ] 04-knowledge-base.png
+- [ ] 03-arsitektur.png (opsional)
+- [ ] 04-katalog.png (opsional)
 - [ ] 05-eval-suite.png
+
+---
+
+## Catatan
+
+Screenshots ini diambil dari aplikasi RAG 2.0 (Next.js), bukan dari Langflow.
