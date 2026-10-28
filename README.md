@@ -2,16 +2,28 @@
 
 > Tema: **Productivity & Smart Business** — Hacktiv8 National Hackathon 2026 × IBM SkillsBuild
 
-![Node.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
-![Ollama](https://img.shields.io/badge/Ollama-Granite_3.3-lightgrey?logo=ollama)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
+![IBM Granite](https://img.shields.io/badge/Model-IBM%20Granite_3.3-lightgrey?logo=ibm)
 ![Gemini](https://img.shields.io/badge/LLM-Google_Gemini-blue?logo=google)
+![Ollama](https://img.shields.io/badge/Ollama-local-lightgrey?logo=ollama)
 ![Runtime](https://img.shields.io/badge/runtime-CPU-orange?label=100%25+CPU)
 ![Build](https://img.shields.io/badge/build-passing-green?label=build)
 ![Chat](https://img.shields.io/badge/chat-online-green?label=Rara%20AI%20chat)
+![Architecture](https://img.shields.io/badge/architecture-diagram-blue?logo=readme)
 
 Asisten layanan pelanggan UMKM berbahasa Indonesia — menjawab **hanya dari dokumen resmi toko** (harga, katalog, SOP), dan jujur menolak / meneruskan ke admin jika informasinya tidak ada. Backend RAG berjalan **lokal di Next.js**, tanpa Langflow, IBM Bob, atau vector store khusus — cukup Ollama (IBM Granite) atau Google Gemini, cukup dokumen Markdown.
 
 Demo nyata: [Batik Larasati Pekalongan](https://github.com/lenathea913/RAG-UMKM-Assistant-2.0), toko batik tulis & cap yang dibangun sebagai contoh knowledge base.
+
+---
+
+## Diagram arsitektur
+
+Ada diagram interaktif yang dibuat dengan Archify:
+
+- [Arsitektur RAG UMKM Assistant 2.0](.archify/architecture-rag-umkm-assistant-20261028-092326/rag-umkm-assistant.html) — alur pelanggan → halaman Next.js → `POST /api/chat` → orkestrator RAG (`lib/rag.ts`) → Ollama/Gemini, plus riwayat sesi, eskalasi WhatsApp, dan jalur eval.
+
+Buka file HTML itu di browser (bisa dikirim ke orang lain, semua interaksi ikut serta).
 
 ---
 
@@ -83,184 +95,194 @@ Komponen produk yang terlihat pengguna:
 cd frontend
 npm install
 cp .env.example .env.local
-```
-
-### Konfigurasi
-
-Edit `.env.local` (file ini **tidak boleh di-commit**; sudah masuk `.gitignore`):
-
-```ini
-# Pilih salah satu:
-MODEL_PROVIDER=ollama          # atau "google" kalau pakai Gemini
-
-# Jalur Ollama (hanya dipakai kalau MODEL_PROVIDER=ollama)
-OLLAMA_BASE_URL=http://localhost:11434
-
-# Model (Ollama): set sesuai model yang di-pull
-OLLAMA_MODEL=granite3.3:8b     # atau granite3.3:2b untuk lebih cepat
-
-# API key Gemini (hanya dipakai kalau MODEL_PROVIDER=google)
-GEMINI_API_KEY=               # isi kunci-mu; jangan di-commit
-
-# Metadata toko (ganti sesuai toko yang didemokan)
-STORE_NAME=Batik Larasati
-STORE_TAGLINE=Batik tulis & cap · sejak 2015
-STORE_SINCE=2015
-
-# Nomer kontak admin (kalau pesan perlu eskalasi / nggak ada dokumen)
-ADMIN_WHATSAPP=+62 878-7256-6458
-ADMIN_NAME=Rara Admin
-```
-
-### Jalankan
-
-```bash
-cd frontend
+# edit .env.local: pilih LLM_PROVIDER=ollama atau google, sesuaikan OLLAMA_MODEL / GEMINI_API_KEY
 npm run dev
 ```
+
+Bisa juga klik `start.bat` (development) atau `start.bat prod` (produksi) dari Windows Explorer.
 
 Buka:
 
 - `http://localhost:3000` — halaman utama & chat Rara.
-- `http://localhost:3000/katalog` — katalog + harga reseller.
+- `http://localhost:3000/katalog` — katalog produk & harga reseller.
 - `http://localhost:3000/admin` — dashboard pemilik.
 
-### Cara tercepat kalau mau demo di Ollama
-
-1. Pastikan Ollama jalan (`ollama serve`, atau aplikasi Ollama di system tray).
-2. Pull model (satu kali): `ollama pull granite3.3:8b` (lebih tajam) atau `ollama pull granite3.3:2b` (lebih cepat, cocok kalau CPU terbatas).
-3. `.env.local`: `MODEL_PROVIDER=ollama`, `OLLAMA_MODEL=granite3.3:8b` (atau `2b`).
-4. `npm run dev` → tes: *"Berapa harga Mega Mendung Premium?"* → seharusnya **Rp 1.850.000**, dengan gaya jawaban Rara.
-
-### Preferensi model untuk demo
-
-- **granite3.3:8b** → kualitas tertinggi; cukup "hangat" (jalankan pertanyaan berurutan) kalau di CPU.
-- **granite3.3:2b** → lebih cepat; cocok bila demo butuh respons singkat.
-- **Gemini** → paling cepat bila koneksi bagus; jangan pakai bila kunci bermasalah / layanan gelembung.
-
-### Jalankan via start.bat (Windows)
-
-Repo sudah menyertakan `start.bat` yang mempermudah:
-
-1. Cek Ollama: apakah port 11434 didengarkan, dan apakah model tersedia lewat HTTP.
-2. **Jika pakai Gemini**, skip cek Ollama dan langsung lanjut ke langkah berikutnya.
-3. **Preheat model** (Ollama) — satu request kecil sebelum chat, supaya jawaban pertama cepat; skip kalau pakai Gemini.
-4. Jalankan `npm run dev`.
-
-### Tanpa Ollama / tanpa API key
-
-Chat tetap terbuka, tapi Rara menampilkan pesan ramah: *"Maaf Kak, koneksinya bermasalah. Coba lagi ya."* Cek `GET /api/chat` untuk melihat status preflight (Ollama hidup/mati, model, daftar dokumen).
+> Node.js di mesin ini portable, ada di `D:\Project\node-portable`. Tambahkan ke PATH atau jalankan lewat terminal yang sudah tahu lokasinya.
 
 ---
 
-## Struktur repo
+## Pilih LLM
 
-```
-RAG-UMKM-Assistant-2.0/
-├── README.md                          ← file ini
-├── start.bat                         ← jalanin di Windows dengan cek Ollama/Gemini otomatis
-├── .gitignore
-├── knowledge-base/                   ← dokumen bisnis toko contoh (sumber kebenaran Rara)
-│   ├── katalog-produk.md
-│   ├── price-list.md
-│   └── faq-sop.md
-├── langflow/
-│   └── agent-system-prompt.md        ← system prompt Rara (sumber kebenaran; edit di sini)
-├── evals/                            ← tes kualitas jawaban Rara
-│   ├── eval-questions.md             ← 20 kasus uji (termasuk 7 kasus anti-halusinasi)
-│   ├── eval-results.md               ← ringkasan hasil sesi terakhir
-│   ├── run_evals.py                  ← jalankan: python evals/run_evals.py --all
-│   └── eval-run-latest.json          ← hasil mentah sesi terakhir
-├── bob/                              ← arsip developer tooling lama (bukan produk)
-├── submission/                       ← paket submission hackathon
-│   ├── pitch-draft.md
-│   ├── pitch-deck-slides.md
-│   ├── form-answers.md
-│   ├── deskripsi-singkat.md
-│   └── screenshots/
-└── frontend/
-    ├── package.json
-    ├── .env.example                  ← templat .env.local (tanpa kunci)
-    ├── .gitignore
-    ├── README.md                     ← ringkasan frontend
-    └── app/
-        ├── layout.tsx               ← metadata halaman
-        ├── globals.css              ← token warna & tipografi toko
-        ├── page.tsx                 ← Home + chat Rara
-        ├── katalog/page.tsx         ← Katalog & harga reseller
-        ├── admin/page.tsx           ← Dashboard pemilik
-        ├── api/chat/route.ts        ← Backend Rara (single point of truth)
-        ├── components/
-        │   ├── ui/raised-button.tsx
-        │   └── logo-merak.tsx
-        └── lib/
-            ├── rag.ts               ← RAG lokal, per-provider LLM, streaming, memory
-            └── ...                  ← util color, dsb.
+Dua pilihan, setel di `.env.local` (isi satu blok sesuai yang dipakai):
+
+### Ollama lokal (offline, gratis, 100% CPU)
+
+```ini
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=granite3.3:8b      # atau granite3.3:2b untuk lebih cepat
 ```
 
----
+Pastikan Ollama jalan (`ollama serve` / aplikasi Ollama) dan model sudah di-pull:
 
-## Evaluasi kualitas (kriteria juri)
+```bash
+ollama pull granite3.3:8b        # kualitas lebih baik, lebih berat
+ollama pull granite3.3:2b        # lebih cepat; cocok kalau CPU terbatas
+```
 
-Evaluasi jawaban Rara dijalankan lewat `evals/run_evals.py --all` (tanpa API key Langflow). 20 kasus uji:
+### Gemini (cloud, tercepat bila koneksi bagus)
 
-- **A — Grounding**: jawaban sesuai dokumen.
-- **B — Multi-dokumen**: gabung info 2 dokumen.
-- **C — Anti-halusinasi (WAJIB lulus semua)**: menolak/meng-eskalasi, tidak mengarang.
-- **D — Bahasa & persona**: tetap Bahasa Indonesia, sapaan "Kak", tetap grounded.
+```ini
+LLM_PROVIDER=google
+GEMINI_API_KEY=isi-kunci-mu-disini
+```
 
-Hasil terakhir: lihat `evals/eval-results.md` deskripsi hasil & catatan.
-
-Aturan singkat: sebelum merubah prompt atau dokumen, jalankan ulang evaluasi; kasus C wajib lulus semua. `eval-results.md` wajib diperbarui tiap kali dijalankan ulang.
-
----
-
-## Bahasa & gaya
-
-- Semua teks UI & jawaban dalam Bahasa Indonesia.
-- Nada ramah, sapaan "Kak".
-- Tidak pakai tanda hubung panjang (em dash); ditulis dengan koma, titik, atau kata sambung biasa, di seluruh sumber yang terlihat pengguna.
+Bila `LLM_PROVIDER=google`, cek Ollama **tidak diperlukan** — `start.bat` dan backend otomatis lewati langkah Ollama.
 
 ---
 
-## Catatan soal IBM / Langflow / Bob
+## Konfigurasi toko
 
-Project ini dulunya dibangun dengan IBM Langflow + IBM Bob sebagai pipeline RAG visual. Versi ini (RAG 2.0) sudah **tidak bergantung** pada keduanya lagi — backendnya Next.js. Folder `langflow/` saat ini hanya menyimpan *system prompt* sebagai sumber kebenaran dan dokumen pendamping. Folder `bob/` masih ada sebagai arsip developer tool lama (bukan produk akhir).
+`.env.local` juga memuat metadata toko yang jadi sumber kebenaran Rara dan teks UI. Ikuti `.env.example` dan sesuaikan:
 
----
+```ini
+STORE_NAME=Batik Larasati Pekalongan
+STORE_TAGLINE=Batik tulis & cap khas pesisir Pekalongan, ditulis tangan oleh pengrajin setempat
+STORE_SINCE=2015
+ADMIN_WHATSAPP=+6287872566458
+ADMIN_NAME=Rara
+DISCLAIMER_AI=Bot AI layanan pelanggan
+```
 
-## Security & kredensial
-
-- **Kunci API & file env tidak pernah di-commit.** `.env.local` tidak ter-track, dan `.gitignore` melindunginya.
-- Jangan pernah menyalin `.env.local` ke `.env.example` atau kode.
-- Eval: `run_evals.py` beroperasi tanpa kunci API ketiga (hanya Ollama atau Gemini sesuai konfigurasi lokal).
-
----
-
-## Repo ini untuk tugas / submission
-
-Repo ini dibuat sebagai projek UTS kamu (nanti bisa dipublikasi jika diminta oleh dosen / panitia). Tiru toko, dokumen, dan logo sesuai permintaan. Saat dipublikasi: public kan repo jika diminta reviewer; jangan sampai melekat kunci API.
+Metadata ini muncul langsung di UI dan jadi pembeda produk — jadi setel di sini, bukan hardcode di kode.
 
 ---
 
-## Changelog singkat (RAG 2.0)
+## Knowledge base
 
-Perubahan utama di versi ini dibanding repo lama:
+Dokumen toko ada di `knowledge-base/`:
 
-- Backend RAG lokal di Next.js: `frontend/lib/rag.ts` baca `knowledge-base/*.md`, pakai system prompt dari `langflow/agent-system-prompt.md`, panggil Ollama/Gemini.
-- Hapus ketergantungan Langflow & IBM Bob dari backend (`frontend/lib/langflow.ts` dihapus, `api/chat/route.ts` bukan proxy Langflow lagi).
-- Streaming endpoint (`POST /api/chat`, mode NDJSON untuk Ollama / SSE untuk Gemini).
-- Korpus dipindah supaya prefix prompt identik antar request (lebih cepat di Ollama).
-- Eval: `run_evals.py` berjalan tanpa `LANGFLOW_API_KEY`.
-- Halaman: `/`, `/katalog`, `/admin` lengkap + aset motif batik di `frontend/public/aset`.
-- Dokumentasi: README GitHub + cara menjalankan + arsitektur, bebas em dash di semua teks yang terlihat pengguna.
+- `katalog-produk.md` — daftar produk & kode.
+- `price-list.md` — harga resmi & harga reseller.
+- `faq-sop.md` — FAQ & SOP layanan pelanggan.
+
+Backend membaca file-file ini tiap request, jadi perubahan langsung efektif tanpa restart.
+
+Untuk menambah produk/harga/aturan baru:
+
+1. Edit file Markdown di `knowledge-base/`.
+2. Simpan.
+3. Coba tanya Rara soal yang baru — jawaban sudah sesuai.
+
+Untuk perubahan aturan perilaku Rara (gaya jawaban, aturan penolakan, contoh kasus), edit `langflow/agent-system-prompt.md` — file ini tetap jadi sumber kebenaran prompt meski tidak pakai Langflow lagi.
 
 ---
 
-## Status
+## Evaluasi
 
-- [x] Backend RAG 2.0 (tanpa Langflow/Bob)
-- [x] Streaming (NDJSON / SSE)
-- [x] Multi-provider (ollama / gemini)
-- [x] Eval 20 kasus + anti-halusinasi
-- [ ] Integrasi penyimpanan server untuk panel admin (plan berikutnya)
+Kualitas jawaban Rara diukur dengan 20 kasus uji yang ada di `evals/`.
+
+- `evals/eval-questions.md` — daftar soal plus kriteria lulus tiap kasus.
+- `evals/run_evals.py` — jalankan dari root repo:
+
+  ```bash
+  python evals/run_evals.py --all
+  ```
+
+  Tanpa perlu `LANGFLOW_API_KEY` (backend sekarang bukan Langflow).
+
+- `evals/eval-results.md` — ringkasan hasil terakhir, termasuk catatan kasus.
+- `evals/eval-run-latest.json` — hasil mentah sesi terakhir.
+
+**Aturan utama**: jalankan ulang evaluasi sebelum dan sesudah mengubah dokumen atau prompt. **Kasus C (anti-halusinasi) wajib lulus semua** — itu kriteria penilaian & product differentiation.
+
+---
+
+## Tampilan & aset toko
+
+Halaman depan menggunakan latar belakang dan ilustrasi motif batik dari folder `frontend/public/aset/`. Setiap produk di koleksi dan di kartu produk menggunakan gambarnya sendiri, dipasang sebagai mini background kartu (blur + opacity 50%):
+
+| Produk | File aset |
+|---|---|
+| Mega Mendung Premium | `frontend/public/aset/mega-mendung-premium.jpeg` |
+| Buketan Klasik | `frontend/public/aset/buketan-klasik.jpeg` |
+| Mega Mendung Cap | `frontend/public/aset/mega-mendung-cap.jpeg` |
+| Kemeja Parang Rusak | `frontend/public/aset/kemeja-parang-rusak.jpeg` |
+
+Latar halaman utama pakai `frontend/public/aset/background.jpeg`. Jika ingin mengganti suasana toko, ganti file-file itu (atau setel ulang `STORE_*` di `.env.local` untuk teks).
+
+---
+
+## Aturan produk (ini dinilai)
+
+1. Tampilkan indikator asisten AI (disclaimer kecil di chat).
+2. Tampilkan jawaban apa adanya — termasuk bila asisten bilang "informasi belum ditemukan, diteruskan ke admin". Itu **fitur**, jangan disembunyikan.
+3. Sediakan tombol **Hubungi Admin** (eskalasi manusia) di chat.
+4. **Jangan pernah minta / menyimpan data pribadi pelanggan** di frontend.
+5. Semua teks UI dalam Bahasa Indonesia, nada ramah ("Kak").
+6. Tiap kali ubah prompt atau dokumen → jalankan ulang `evals/run_evals.py --all`, laporkan di `evals/eval-results.md`, lalu commit.
+
+---
+
+## Status & roadmap
+
+Sudah jalan:
+
+- Backend RAG 2.0 (Next.js, tanpa Langflow/Bob).
+- Multi-provider: Ollama (Granite 3.3 2b / 8b) dan Gemini.
+- Streaming endpoint (NDJSON Ollama / SSE Gemini).
+- Eval 20 kasus termasuk 7 anti-halusinasi.
+- Halaman home, chat, katalog, admin, motif batik.
+- Diagram arsitektur interaktif (Archify).
+
+Sedang dikerjakan (bisa kamu lanjutkan):
+
+- Panel admin integrasi ke knowledge base & penyimpanan server (sekarang masih demo localStorage).
+- Eksperimen berbagai model & metode grounding.
+- Skrip evaluasi & kasus uji yang lebih tajam.
+
+---
+
+## Folder penting
+
+| Path | Menjadi apa |
+|---|---|
+| `frontend/app/api/chat/route.ts` | Backend Rara — single entrypoint |
+| `frontend/lib/rag.ts` | Logika RAG: baca dokumen, baca prompt, susun prompt, multi-provider, streaming, memory |
+| `knowledge-base/*.md` | Dokumen bisnis toko — sumber kebenaran jawaban Rara |
+| `langflow/agent-system-prompt.md` | System prompt Rara — sumber kebenaran gaya & aturan |
+| `evals/` | Evaluasi kualitas jawaban (termasuk 7 kasus anti-halusinasi) |
+| `submission/` | Paket submission hackathon (arsip; lihat isinya jika relevan) |
+| `submission/screenshots/` | Placeholder screenshot untuk submission (nanti diisi) |
+
+Arsip yang perlu kamu tahu tapi biasanya tidak disentuh:
+
+- `langflow/UMKM-Assistant-export.json` — export flow Langflow lama.
+- `langflow/BUILD-GUIDE.md` — dokumentasi cara membangun flow Langflow versi lama.
+- `bob/` — konfigurasi IBM Bob (developer tooling, bukan produk).
+
+---
+
+## Submission & dokumentasi pendukung
+
+- `submission/pitch-deck-slides.md` — isi teks 10 slide pitch deck, siap salin ke Canva/PowerPoint.
+- `submission/form-answers.md` — jawaban form submission, jadi siap tempel.
+- `submission/deskripsi-singkat.md` — deskripsi singkat project.
+- `submission/pitch-draft.md` — draf narasi pitch.
+- `submission/screenshots/README.md` — panduan ambil 5 gambar screenshot untuk submission.
+- `PANDUAN-FRONTEND.md` — panduan onboarding developer yang lebih panjang.
+
+---
+
+## Repositori
+
+- Repo utama: https://github.com/lenathea913/RAG-UMKM-Assistant-2.0
+- Demo toko contoh: [Batik Larasati Pekalongan](https://github.com/lenathea913/RAG-UMKM-Assistant-2.0)
+- Repo pendahulunya (versi Langflow/IBM Bob): https://github.com/lenathea913/umkm-assistant
+
+---
+
+## Lisensi
+
+Project ini dibangun untuk Hacktiv8 National Hackathon 2026 × IBM SkillsBuild. Checklis lisensi & penggunaan data pelanggan tetap berlaku sesuai ketentuan hackathon & platform yang dipakai.
+
