@@ -1,6 +1,7 @@
 # Daftar Harga Resmi Batik Larasati Pekalongan
 
-Berlaku mulai 1 September 2026. Harga dalam Rupiah, belum termasuk ongkir.
+Berlaku mulai 1 September 2026.
+Harga dalam Rupiah, belum termasuk ongkir.
 
 ## Batik Tulis
 
@@ -26,7 +27,7 @@ Berlaku mulai 1 September 2026. Harga dalam Rupiah, belum termasuk ongkir.
 ## Harga Reseller (pembelian minimal 10 pcs, boleh campur kode)
 
 - Diskon 15% dari harga reguler untuk batik cap dan ready to wear.
-- Batik tulis TIDAK termasuk program reseller.
+- Batik tulis tidak termasuk program reseller.
 
 ## Pembayaran & Promo
 
