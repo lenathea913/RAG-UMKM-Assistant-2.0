@@ -1,6 +1,6 @@
 # RAG-UMKM-Assistant-2.0
 
-> Tema: **Productivity & Smart Business** — Hacktiv8 National Hackathon 2026 × IBM SkillsBuild
+> Tema: **Productivity & Smart Business** 
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
 ![IBM Granite](https://img.shields.io/badge/Model-IBM%20Granite_3.3-lightgrey?logo=ibm)
@@ -282,7 +282,5 @@ Arsip yang perlu kamu tahu tapi biasanya tidak disentuh:
 
 ---
 
-## Lisensi
 
-Project ini dibangun untuk Hacktiv8 National Hackathon 2026 × IBM SkillsBuild. Checklis lisensi & penggunaan data pelanggan tetap berlaku sesuai ketentuan hackathon & platform yang dipakai.
 
