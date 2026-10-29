@@ -149,7 +149,7 @@ Bila `LLM_PROVIDER=google`, cek Ollama **tidak diperlukan** — `start.bat` dan 
 STORE_NAME=Batik Larasati Pekalongan
 STORE_TAGLINE=Batik tulis & cap khas pesisir Pekalongan, ditulis tangan oleh pengrajin setempat
 STORE_SINCE=2015
-ADMIN_WHATSAPP=+6287872566458
+ADMIN_WHATSAPP=Nomer WhatsApp 
 ADMIN_NAME=Rara
 DISCLAIMER_AI=Bot AI layanan pelanggan
 ```
